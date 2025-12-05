@@ -27,12 +27,12 @@ export async function chat(prompt: string, systemPrompt?: string): Promise<strin
 }
 
 /**
- * Get embedding for a single text using text-embedding-3-small
+ * Get embedding for a single text
  */
 export async function getEmbedding(text: string): Promise<number[]> {
   try {
     const response = await openai.embeddings.create({
-      model: 'text-embedding-3-small',
+      model: 'text-embedding-3-small', // TODO is this the best/most effective one?
       input: text,
     })
 
@@ -48,6 +48,7 @@ export async function getEmbedding(text: string): Promise<number[]> {
  */
 export async function getEmbeddings(texts: string[]): Promise<number[][]> {
   try {
+    // TODO where is the batching done? suggestion: process in batches of 100 to reduce API calls
     const response = await openai.embeddings.create({
       model: 'text-embedding-3-small',
       input: texts,
