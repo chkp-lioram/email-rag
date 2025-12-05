@@ -7,9 +7,10 @@ export interface Email {
   subject: string
   body: string
   timestamp: string // ISO date
-  hasAttachment: boolean
-  attachmentName?: string
-  isPhishing: boolean // ground truth
+  hasAttachment: boolean // TODO should this be plural?
+  attachmentName?: string // TODO an array of attachments??
+  //   TODO what does this mean? ground truth?? why is this needed? also the phishingType
+  isPhishing: boolean // ground truth for testing
   phishingType?: string // e.g., "credential_harvest", "bec", "urgency_scam", "invoice_fraud"
 }
 
