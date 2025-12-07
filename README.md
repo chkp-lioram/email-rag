@@ -227,7 +227,7 @@ email-rag/
 │   └── vectordb.test.ts       # VectorDB operations test
 ├── data/
 │   ├── emails.json            # Generated dataset
-│   └── chroma-data/           # ChromaDB persistence
+│   └── chroma-data/           # ChromaDB persistence (gitignored)
 ├── examples/
 │   └── queries.md             # Example queries
 ├── ARCHITECTURE.md            # System architecture & diagrams
