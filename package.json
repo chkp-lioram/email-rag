@@ -3,15 +3,21 @@
   "version": "1.0.0",
   "description": "RAG system for searching for phishing threats in email datasets",
   "main": "src/index.ts",
+  "type": "module",
   "scripts": {
-    "generate": "tsx src/index.ts generate",
-    "ingest": "tsx src/index.ts ingest",
-    "query": "tsx src/index.ts query",
-    "interactive": "tsx src/index.ts interactive"
+    "test:llm": "tsx --env-file=.env src/llm.openai.test.ts",
+    "test:vectordb": "tsx --env-file=.env src/vectordb.test.ts",
+    "test": "npm run test:llm && npm run test:vectordb",
+    "generate": "tsx --env-file=.env src/generate-dataset.ts",
+    "ingest": "tsx --env-file=.env src/ingest.ts",
+    "inspect": "tsx --env-file=.env src/inspect-db.ts",
+    "query": "tsx --env-file=.env src/index.ts query",
+    "interactive": "tsx --env-file=.env src/index.ts interactive"
   },
   "author": "Lior Amouyal",
   "license": "ISC",
   "dependencies": {
+    "@chroma-core/default-embed": "^0.1.9",
     "@faker-js/faker": "^10.1.0",
     "chromadb": "^3.1.6",
     "openai": "^6.9.1"
