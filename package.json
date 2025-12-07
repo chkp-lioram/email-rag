@@ -10,7 +10,7 @@
     "test": "npm run test:llm && npm run test:vectordb",
     "generate": "tsx --env-file=.env src/generate-dataset.ts",
     "ingest": "tsx --env-file=.env src/ingest.ts",
-    "inspect": "tsx --env-file=.env src/inspect-db.ts",
+    "inspect": "tsx --env-file=.env src/vectordb.inspect.ts",
     "query": "tsx --env-file=.env src/index.ts query",
     "interactive": "tsx --env-file=.env src/index.ts interactive"
   },
