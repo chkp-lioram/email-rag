@@ -22,7 +22,7 @@ This project demonstrates:
 
 ## Architecture
 
-For detailed architecture diagrams, component descriptions and design decisions, see [architecture.md](architecture.md).
+For detailed architecture diagrams, component descriptions and design decisions, see [ARCHITECTURE.md](ARCHITECTURE.md).
 
 **Quick Overview:**
 
@@ -228,7 +228,7 @@ email-rag/
 │   └── chroma-data/           # ChromaDB persistence
 ├── examples/
 │   └── queries.md             # Example queries
-├── architecture.md            # System architecture & diagrams
+├── ARCHITECTURE.md            # System architecture & diagrams
 ├── README.md                  # This file
 ├── package.json
 └── tsconfig.json

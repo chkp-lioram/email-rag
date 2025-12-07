@@ -145,7 +145,7 @@ This is a Retrieval-Augmented Generation (RAG) system for detecting and analyzin
 - `src/index.ts`: CLI entry point (query/interactive modes)
 - `src/llm.ts`: Centralized OpenAI API handling
 - `src/vectordb.ts`: ChromaDB wrapper with optimized operations
-- `architecture.md`: System architecture diagrams and design decisions
+- `ARCHITECTURE.md`: System architecture diagrams and design decisions
 - `README.md`: Setup instructions and usage guide
 
 ## Development Guidelines
