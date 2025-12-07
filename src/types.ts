@@ -1,4 +1,3 @@
-// Core email interface
 export interface Email {
   id: string
   sender: string // email address
@@ -7,19 +6,16 @@ export interface Email {
   subject: string
   body: string
   timestamp: string // ISO date
-  hasAttachment: boolean // TODO should this be plural?
-  attachmentName?: string // TODO an array of attachments??
-  //   TODO what does this mean? ground truth?? why is this needed? also the phishingType
+  hasAttachment: boolean
+  attachmentName?: string
   isPhishing: boolean // ground truth for testing
-  phishingType?: string // e.g., "credential_harvest", "bec", "urgency_scam", "invoice_fraud"
+  phishingType?: string // also for testing. e.g., "credential_harvest", "bec", "urgency_scam", "invoice_fraud"
 }
 
-// Email with embedding vector
 export interface EmailWithEmbedding extends Email {
   embedding: number[]
 }
 
-// Threat analysis result for a single email
 export interface ThreatResult {
   emailId: string
   email: Email
@@ -28,14 +24,12 @@ export interface ThreatResult {
   threatIndicators: string[]
 }
 
-// Complete query response
 export interface QueryResponse {
   query: string
   results: ThreatResult[]
   totalFound: number
 }
 
-// Vector DB search result
 export interface SearchResult {
   id: string
   document: string
