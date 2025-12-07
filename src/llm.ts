@@ -1,27 +1,25 @@
 import OpenAI from 'openai'
 
-// Initialize OpenAI client
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 })
 
-/**
- * Get chat completion from GPT-4o
- */
+const CHAT_MODEL = process.env.OPENAI_CHAT_MODEL || 'gpt-5-nano'
+const EMBEDDING_MODEL = process.env.OPENAI_EMBEDDING_MODEL || 'text-embedding-3-small'
+
 export async function chat(prompt: string, systemPrompt?: string): Promise<string> {
   try {
     const response = await openai.chat.completions.create({
-      model: 'gpt-4o',
+      model: CHAT_MODEL,
       messages: [
         ...(systemPrompt ? [{ role: 'system' as const, content: systemPrompt }] : []),
         { role: 'user' as const, content: prompt },
       ],
-      temperature: 0.7,
     })
 
     return response.choices[0]?.message?.content || ''
   } catch (error) {
-    console.error('Error in chat completion:', error)
+    console.error('>> Error in chat completion:', error)
     throw error
   }
 }
@@ -32,13 +30,14 @@ export async function chat(prompt: string, systemPrompt?: string): Promise<strin
 export async function getEmbedding(text: string): Promise<number[]> {
   try {
     const response = await openai.embeddings.create({
-      model: 'text-embedding-3-small', // TODO is this the best/most effective one?
+      model: EMBEDDING_MODEL,
       input: text,
+      encoding_format: 'float',
     })
 
     return response.data[0].embedding
   } catch (error) {
-    console.error('Error getting embedding:', error)
+    console.error('>> Error getting embedding:', error)
     throw error
   }
 }
@@ -48,15 +47,15 @@ export async function getEmbedding(text: string): Promise<number[]> {
  */
 export async function getEmbeddings(texts: string[]): Promise<number[][]> {
   try {
-    // TODO where is the batching done? suggestion: process in batches of 100 to reduce API calls
     const response = await openai.embeddings.create({
-      model: 'text-embedding-3-small',
+      model: EMBEDDING_MODEL,
       input: texts,
+      encoding_format: 'float',
     })
 
     return response.data.map((item) => item.embedding)
   } catch (error) {
-    console.error('Error getting batch embeddings:', error)
+    console.error('>> Error getting batch embeddings:', error)
     throw error
   }
 }
