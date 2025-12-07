@@ -227,6 +227,7 @@ email-rag/
 │   └── vectordb.test.ts       # VectorDB operations test
 ├── data/
 │   ├── emails.json            # Generated dataset
+│   ├── emails.example.json    # Pre-Generated dataset for quick start
 │   └── chroma-data/           # ChromaDB persistence (gitignored)
 ├── examples/
 │   └── queries.md             # Example queries
