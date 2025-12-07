@@ -79,6 +79,14 @@ This is a Retrieval-Augmented Generation (RAG) system for detecting and analyzin
   - Invoice Fraud
   - Urgency Scams
 
+**Batch Generation Optimization:**
+
+- **Batch Size**: 10 emails per LLM API call (configurable via `BATCH_SIZE` constant)
+- **Performance**: ~20x faster than sequential generation (10 API calls vs 200)
+- **Approach**: Single prompt generates multiple emails as JSON array
+- **Structure**: LLM returns `[{"subject": "...", "body": "..."}]` for batch processing
+- **Metadata**: Faker.js generates realistic sender/recipient details post-generation
+
 **Safety Bypass Pattern:**
 
 - **Problem**: LLM refuses to generate "phishing" emails
@@ -124,6 +132,13 @@ This is a Retrieval-Augmented Generation (RAG) system for detecting and analyzin
 
 ### 5. Batch Processing Strategy
 
+**Dataset Generation (src/generate-dataset.ts):**
+
+- Generate emails in batches of 10 per LLM call
+- Structured JSON output: `[{"subject": "...", "body": "..."}]`
+- Reduces API calls from ~200 to ~10 for 100 emails (~20x speedup)
+- Post-process with Faker.js for metadata and placeholder replacement
+
 **Ingestion (src/ingest.ts):**
 
 - Process emails in batches of 10
@@ -139,7 +154,7 @@ This is a Retrieval-Augmented Generation (RAG) system for detecting and analyzin
 ## Key Files & Responsibilities
 
 - `src/types.ts`: **Source of Truth** for data structures (`Email`, `ThreatResult`, `QueryResponse`, etc.)
-- `src/generate-dataset.ts`: Synthetic data generation with safety bypass pattern
+- `src/generate-dataset.ts`: Batch synthetic data generation with safety bypass pattern (10 emails per API call)
 - `src/ingest.ts`: Batch embedding generation and ChromaDB ingestion
 - `src/query.ts`: Complete RAG pipeline with hybrid search and batch analysis
 - `src/index.ts`: CLI entry point (query/interactive modes)
@@ -174,6 +189,7 @@ This is a Retrieval-Augmented Generation (RAG) system for detecting and analyzin
 
 **Performance Optimization:**
 
+- Batch dataset generation (10 emails per call, ~20x faster)
 - Batch embeddings (10 emails per call)
 - Single LLM analysis call for all results
 - Local ChromaDB for fast queries

@@ -76,11 +76,13 @@ Leave this terminal running. ChromaDB will start on `localhost:8000`.
 
 ### Generate Synthetic Dataset
 
-Create 100 emails (60 legitimate, 40 phishing) with realistic content:
+Create 100 emails (60 legitimate, 40 phishing) with realistic content using batch processing:
 
 ```bash
 npm run generate
 ```
+
+This generates emails in batches of 10 per LLM API call (~10 total calls), making it ~20x faster than sequential generation.
 
 Output: `data/emails.json`
 
@@ -255,3 +257,15 @@ email-rag/
 
 - Database may be empty - run `npm run generate` then `npm run ingest`
 - Check ChromaDB is running and accessible
+
+## Future Improvements
+
+- **Dataset Generation**: Already optimized from ~200 to ~10 LLM calls via batch processing. Could be further improved by:
+  - Running a local LLM for generation (faster, no API costs)
+  - Increasing batch size beyond 10 emails per call
+  - Caching and reusing common email patterns
+- **Embeddings**: Consider using ChromaDB's built-in embedding models via `queryTexts` parameter:
+  - Faster (locally hosted)
+  - Free (no API costs)
+  - May be more appropriate for small-scale datasets
+- **Query Performance**: Implement caching for frequently asked queries

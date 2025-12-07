@@ -37,10 +37,12 @@ graph LR
 
 - **Input**: Configuration for email count, phishing ratio (60% legitimate, 40% phishing)
 - **Process**:
-  - Uses Faker.js for realistic metadata (names, emails, dates)
-  - LLM generates email bodies (legitimate business content)
-  - Phishing emails use "training example" prompts to bypass safety filters
-  - Post-processing replaces placeholders with realistic fake data
+  - **Batch Generation**: 10 emails per LLM API call (configurable via `BATCH_SIZE`)
+  - **Structured Output**: LLM returns JSON array `[{"subject": "...", "body": "..."}]`
+  - **Metadata**: Faker.js generates realistic sender/recipient details post-generation
+  - **Safety Bypass**: Phishing emails use "training example" prompts to bypass safety filters
+  - **Post-processing**: Replaces placeholders with realistic fake data via `replacePlaceholders()`
+  - **Performance**: ~20x faster than sequential (10 API calls vs ~200 for 100 emails)
 - **Output**: `data/emails.json` (100 emails with ground truth labels)
 
 ### 2. Ingestion Pipeline (`src/ingest.ts`)
@@ -141,6 +143,7 @@ sequenceDiagram
 
 ### 1. Batch Processing
 
+- **Dataset Generation**: 10 emails per LLM call with structured JSON output (~20x faster)
 - **Embeddings**: Process 10 emails per API call (reduces latency)
 - **Analysis**: Single LLM call for all retrieved emails (10x faster, more cost-effective)
 
@@ -170,11 +173,15 @@ sequenceDiagram
 
 ## Performance Characteristics
 
+- **Dataset Generation**:
+  - Batch processing: 10 emails per API call
+  - ~20x speedup: 10 calls vs ~200 for 100 emails
+  - Structured JSON output for reliable parsing
 - **Query Latency Optimization**:
   - Embedding generation: by requests batching
   - Vector search: minimal as ChromaDB is local
   - LLM batch analysis: single call for multiple emails
-- **Cost Efficiency**: Reduced API calls via batching
+- **Cost Efficiency**: Reduced API calls via batching (generation, embedding, analysis)
 - **Scalability**: Handles 100+ emails; can scale to thousands with ChromaDB
 
 ## Security Considerations
