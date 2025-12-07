@@ -162,6 +162,7 @@ This is a Retrieval-Augmented Generation (RAG) system for detecting and analyzin
 - `src/vectordb.ts`: ChromaDB wrapper with optimized operations
 - `ARCHITECTURE.md`: System architecture diagrams and design decisions
 - `README.md`: Setup instructions and usage guide
+- `examples/queries.md`: 10 example queries with real outputs (confidence scores, threat indicators, explanations)
 
 ## Development Guidelines
 

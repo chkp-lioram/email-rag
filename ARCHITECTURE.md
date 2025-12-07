@@ -110,6 +110,8 @@ graph LR
   - `npm run interactive`: Continuous query loop
   - `npm run inspect`: View database contents
 
+**Example Queries**: See [examples/queries.md](examples/queries.md) for 10 real queries with complete outputs including confidence scores, threat indicators, and detailed explanations.
+
 ## Data Flow
 
 ```mermaid

@@ -172,24 +172,20 @@ Shows:
 
 ## Example Queries
 
-For more query examples, see [examples/queries.md](examples/queries.md).
+See [examples/queries.md](examples/queries.md) for 10 real queries with complete outputs showing confidence scores, threat indicators, and explanations.
 
-**Basic Threat Detection:**
+**Example queries include:**
 
-- "Find phishing emails"
-- "Show suspicious emails with attachments"
-- "Identify urgent payment requests"
-
-**Targeted Searches:**
-
-- "Find emails from gmail addresses mentioning invoice"
-- "Show external emails with urgent language"
-- "Identify CEO impersonation attempts"
-
-**Filtered Searches:**
-
-- "Find emails with attachments from external senders"
-- "Show emails without attachments mentioning passwords"
+- "Show me emails with urgent payment requests from external senders"
+- "Find emails with suspicious attachment names"
+- "Identify emails that impersonate executives"
+- "Show emails requesting password resets"
+- "Find emails with mismatched sender names and domains"
+- "List emails containing external links"
+- "Show me invoice-related emails from free email providers"
+- "Find emails with urgency language"
+- "Identify potential credential harvesting attempts"
+- "Show emails sent outside business hours"
 
 ## Dataset Details
 
@@ -230,7 +226,7 @@ email-rag/
 │   ├── emails.example.json    # Pre-Generated dataset for quick start
 │   └── chroma-data/           # ChromaDB persistence (gitignored)
 ├── examples/
-│   └── queries.md             # Example queries
+│   └── queries.md             # Example queries with real outputs
 ├── ARCHITECTURE.md            # System architecture & diagrams
 ├── README.md                  # This file
 ├── package.json
