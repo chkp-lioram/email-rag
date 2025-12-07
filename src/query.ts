@@ -19,7 +19,7 @@ export async function query(userQuery: string, topK: number = 10): Promise<Query
     const filters = parseFilters(userQuery)
     const whereFilter = buildWhereFilter(filters)
 
-    // Only pass whereFilter if it has content
+    // Only pass whereFilter if it has content (key word filters)
     const hasFilters = Object.keys(whereFilter).length > 0
     if (hasFilters) {
       console.log('Applying filters:', JSON.stringify(whereFilter, null, 2))

@@ -9,7 +9,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const DATA_DIR = path.join(__dirname, '../data')
 const EMAILS_FILE = path.join(DATA_DIR, 'emails.json')
 
-async function main() {
+async function ingest() {
   try {
     console.log('Starting ingestion pipeline...')
 
@@ -68,5 +68,5 @@ async function main() {
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-  main()
+  ingest()
 }
